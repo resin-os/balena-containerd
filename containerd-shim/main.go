@@ -1,4 +1,4 @@
-package main
+package containerdShim
 
 import (
 	"flag"
@@ -31,7 +31,7 @@ type controlMessage struct {
 // Arg0: id of the container
 // Arg1: bundle path
 // Arg2: runtime binary
-func main() {
+func Main() {
 	flag.Parse()
 	cwd, err := os.Getwd()
 	if err != nil {
