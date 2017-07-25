@@ -1,4 +1,4 @@
-package main
+package ctr
 
 import (
 	"fmt"
@@ -19,7 +19,7 @@ type exit struct {
 	Code int
 }
 
-func main() {
+func Main() {
 	// We want our defer functions to be run when calling fatal()
 	defer func() {
 		if e := recover(); e != nil {

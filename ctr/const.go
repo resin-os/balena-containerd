@@ -1,4 +1,4 @@
-package main
+package ctr
 
 // ctr wide constants
 const (
