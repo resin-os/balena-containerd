@@ -1,4 +1,4 @@
-package main
+package containerd
 
 import (
 	"fmt"
@@ -120,7 +120,7 @@ func setupDumpStacksTrap() {
 	}()
 }
 
-func main() {
+func Main() {
 	logrus.SetFormatter(&logrus.TextFormatter{TimestampFormat: time.RFC3339Nano})
 	app := cli.NewApp()
 	app.Name = "containerd"
