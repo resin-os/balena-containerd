@@ -1,4 +1,4 @@
-package main
+package containerd
 
 import (
 	"context"
@@ -42,7 +42,7 @@ func init() {
 	}
 }
 
-func main() {
+func Main() {
 	app := cli.NewApp()
 	app.Name = "containerd"
 	app.Version = version.Version

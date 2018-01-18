@@ -1,6 +1,6 @@
 // +build !windows
 
-package main
+package ctr
 
 import "github.com/containerd/containerd/cmd/ctr/commands/shim"
 

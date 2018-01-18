@@ -1,4 +1,4 @@
-package main
+package ctr
 
 import (
 	"fmt"
@@ -36,7 +36,7 @@ func init() {
 	}
 }
 
-func main() {
+func Main() {
 	app := cli.NewApp()
 	app.Name = "ctr"
 	app.Version = version.Version

@@ -1,5 +1,5 @@
 // +build !no_btrfs
 
-package main
+package containerd
 
 import _ "github.com/containerd/containerd/snapshots/btrfs"

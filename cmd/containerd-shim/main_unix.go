@@ -1,6 +1,6 @@
 // +build !windows
 
-package main
+package containerdShim
 
 import (
 	"bytes"
@@ -57,7 +57,7 @@ func init() {
 	flag.Parse()
 }
 
-func main() {
+func Main() {
 	if debugFlag {
 		logrus.SetLevel(logrus.DebugLevel)
 	}

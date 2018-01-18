@@ -1,6 +1,6 @@
 // +build darwin freebsd solaris
 
-package main
+package containerd
 
 import (
 	_ "github.com/containerd/containerd/snapshots/naive"

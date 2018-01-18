@@ -1,6 +1,6 @@
 // +build !linux,!windows,!darwin
 
-package main
+package containerdShim
 
 import (
 	"os"

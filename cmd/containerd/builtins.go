@@ -1,4 +1,4 @@
-package main
+package containerd
 
 // register containerd builtins here
 import (

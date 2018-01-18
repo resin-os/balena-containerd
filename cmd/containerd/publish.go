@@ -1,4 +1,4 @@
-package main
+package containerd
 
 import (
 	gocontext "context"

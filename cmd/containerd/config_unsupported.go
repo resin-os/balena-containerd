@@ -1,6 +1,6 @@
 // +build !linux,!windows,!solaris
 
-package main
+package containerd
 
 import (
 	"github.com/containerd/containerd/defaults"
