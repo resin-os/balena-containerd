@@ -16,7 +16,7 @@
    limitations under the License.
 */
 
-package main
+package containerdShim
 
 import (
 	"bytes"
@@ -82,7 +82,7 @@ func init() {
 	flag.Parse()
 }
 
-func main() {
+func Main() {
 	debug.SetGCPercent(40)
 	go func() {
 		for range time.Tick(30 * time.Second) {

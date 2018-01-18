@@ -16,7 +16,7 @@
    limitations under the License.
 */
 
-package main
+package ctr
 
 import "github.com/containerd/cri/cli"
 
