@@ -14,7 +14,7 @@
    limitations under the License.
 */
 
-package main
+package ctr
 
 import (
 	"fmt"
@@ -31,7 +31,7 @@ func init() {
 	seed.WithTimeAndRand()
 }
 
-func main() {
+func Main() {
 	app := app.New()
 	app.Commands = append(app.Commands, pluginCmds...)
 	if err := app.Run(os.Args); err != nil {
