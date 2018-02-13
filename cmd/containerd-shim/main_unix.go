@@ -54,10 +54,11 @@ func init() {
 	// currently, the `containerd publish` utility is embedded in the daemon binary.
 	// The daemon invokes `containerd-shim -containerd-binary ...` with its own os.Executable() path.
 	flag.StringVar(&containerdBinaryFlag, "containerd-binary", "containerd", "path to containerd binary (used for `containerd publish`)")
-	flag.Parse()
 }
 
 func Main() {
+	flag.Parse()
+
 	if debugFlag {
 		logrus.SetLevel(logrus.DebugLevel)
 	}
