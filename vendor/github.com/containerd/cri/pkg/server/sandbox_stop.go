@@ -42,9 +42,8 @@ func (c *criService) StopPodSandbox(ctx context.Context, r *runtime.StopPodSandb
 	id := sandbox.ID
 
 	// Stop all containers inside the sandbox. This terminates the container forcibly,
-	// and container may still be so production should not rely on this behavior.
-	// TODO(random-liu): Delete the sandbox container before this after permanent network namespace
-	// is introduced, so that no container will be started after that.
+	// and container may still be created, so production should not rely on this behavior.
+	// TODO(random-liu): Introduce a state in sandbox to avoid future container creation.
 	containers := c.containerStore.List()
 	for _, container := range containers {
 		if container.SandboxID != id {
@@ -54,6 +53,17 @@ func (c *criService) StopPodSandbox(ctx context.Context, r *runtime.StopPodSandb
 		// if a container is removed after list.
 		if err = c.stopContainer(ctx, container, 0); err != nil {
 			return nil, errors.Wrapf(err, "failed to stop container %q", container.ID)
+		}
+	}
+
+	if err := c.unmountSandboxFiles(id, sandbox.Config); err != nil {
+		return nil, errors.Wrap(err, "failed to unmount sandbox files")
+	}
+
+	// Only stop sandbox container when it's running.
+	if sandbox.Status.Get().State == sandboxstore.StateReady {
+		if err := c.stopSandboxContainer(ctx, sandbox); err != nil {
+			return nil, errors.Wrapf(err, "failed to stop sandbox container %q", id)
 		}
 	}
 
@@ -77,16 +87,6 @@ func (c *criService) StopPodSandbox(ctx context.Context, r *runtime.StopPodSandb
 
 	logrus.Infof("TearDown network for sandbox %q successfully", id)
 
-	if err := c.unmountSandboxFiles(id, sandbox.Config); err != nil {
-		return nil, errors.Wrap(err, "failed to unmount sandbox files")
-	}
-
-	// Only stop sandbox container when it's running.
-	if sandbox.Status.Get().State == sandboxstore.StateReady {
-		if err := c.stopSandboxContainer(ctx, sandbox); err != nil {
-			return nil, errors.Wrapf(err, "failed to stop sandbox container %q", id)
-		}
-	}
 	return &runtime.StopPodSandboxResponse{}, nil
 }
 
@@ -128,7 +128,7 @@ func (c *criService) waitSandboxStop(ctx context.Context, sandbox sandboxstore.S
 // teardownPod removes the network from the pod
 func (c *criService) teardownPod(id string, path string, config *runtime.PodSandboxConfig) error {
 	if c.netPlugin == nil {
-		return errors.New("cni config not intialized")
+		return errors.New("cni config not initialized")
 	}
 
 	labels := getPodCNILabels(id, config)
