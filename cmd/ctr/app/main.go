@@ -23,6 +23,7 @@ import (
 	"github.com/containerd/containerd/cmd/ctr/commands/containers"
 	"github.com/containerd/containerd/cmd/ctr/commands/content"
 	"github.com/containerd/containerd/cmd/ctr/commands/events"
+	"github.com/containerd/containerd/cmd/ctr/commands/health"
 	"github.com/containerd/containerd/cmd/ctr/commands/images"
 	"github.com/containerd/containerd/cmd/ctr/commands/install"
 	"github.com/containerd/containerd/cmd/ctr/commands/leases"
@@ -97,6 +98,7 @@ containerd CLI
 		containers.Command,
 		content.Command,
 		events.Command,
+		health.Command,
 		images.Command,
 		leases.Command,
 		namespacesCmd.Command,
