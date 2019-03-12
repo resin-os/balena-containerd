@@ -39,7 +39,7 @@ var Command = cli.Command{
 			return err
 		}
 
-		status := response.GetStatus()
+		status := response.Status
 		if status != health.HealthCheckResponse_SERVING {
 			return cli.NewExitError(status.String(), 1)
 		}
