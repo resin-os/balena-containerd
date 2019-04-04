@@ -60,8 +60,8 @@ var (
 
 const (
 	configFilename = "config.json"
-	defaultRuntime = "runc"
-	defaultShim    = "containerd-shim"
+	defaultRuntime = "balena-engine-runc"
+	defaultShim    = "balena-engine-containerd-shim"
 
 	// cleanupTimeout is default timeout for cleanup operations
 	cleanupTimeout = 1 * time.Minute
