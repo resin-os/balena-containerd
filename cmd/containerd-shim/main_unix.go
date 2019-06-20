@@ -69,7 +69,7 @@ var (
 	}
 )
 
-func init() {
+func Main() {
 	flag.BoolVar(&debugFlag, "debug", false, "enable debug output in logs")
 	flag.StringVar(&namespaceFlag, "namespace", "", "namespace that owns the shim")
 	flag.StringVar(&socketFlag, "socket", "", "socket path to serve")
@@ -82,9 +82,6 @@ func init() {
 	// The daemon invokes `containerd-shim -containerd-binary ...` with its own os.Executable() path.
 	flag.StringVar(&containerdBinaryFlag, "containerd-binary", "containerd", "path to containerd binary (used for `containerd publish`)")
 	flag.StringVar(&containerdBinaryArgv0Flag, "containerd-binary-argv0", "containerd", "argv0 to pass to containerd binary (used for `containerd publish`)")
-}
-
-func Main() {
 	flag.Parse()
 
 	debug.SetGCPercent(40)
